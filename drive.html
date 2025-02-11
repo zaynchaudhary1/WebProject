@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drive - Luxury Car Dealership</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    /* Custom Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #ffffff;
+      background: linear-gradient(135deg, #1d1d1d, #4b4b4b);
+    }
+
+    header {
+      background-color: #000000;
+      position: relative;
+      padding: 15px 0;
+      border-bottom: 1px solid #333;
+    }
+
+    .header-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .btn-outline-light {
+      color: #fff;
+      border-color: #fff;
+    }
+
+    .btn-outline-light:hover {
+      background-color: #fff;
+      color: #000;
+    }
+
+    .language-btn {
+      margin-right: 10px;
+    }
+
+    .login-btn {
+      margin-left: 15px;
+    }
+
+    .video-section {
+      height: 70vh;
+      overflow: hidden;
+    }
+
+    .video-section video {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
+
+    .video-overlay {
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      text-align: left;
+      padding-left: 30px;
+    }
+
+    .navbar {
+      background: linear-gradient(to right, #2a2a2a, #444444);
+    }
+
+    .navbar-nav {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .navbar-nav .nav-item {
+      position: relative;
+    }
+
+    .navbar-nav .nav-link {
+      color: #ffffff !important;
+      padding: 10px 15px;
+    }
+
+    .navbar-nav .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #ffffff !important;
+    }
+
+    .navbar-nav .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #2a2a2a;
+      border: none;
+    }
+
+    .navbar-nav .nav-item:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu .dropdown-item {
+      color: #ffffff !important;
+      padding: 10px 20px;
+    }
+
+    .dropdown-menu .dropdown-item:hover {
+      background-color: #555;
+    }
+
+    .img-fluid {
+      transition: transform 0.3s ease;
+      max-height: 300px; /* Reduce image size */
+      object-fit: cover;
+    }
+
+    .img-fluid:hover {
+      transform: scale(1.05);
+    }
+
+    p {
+      font-weight: 300;
+      color: #cccccc;
+    }
+
+    /* Image slider styles */
+    .image-slider {
+      position: relative;
+      height: 70vh;
+      overflow: hidden;
+    }
+
+    .image-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .image-slide.active {
+      opacity: 1;
+    }
+
+    .image-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-overlay {
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      text-align: left;
+      padding-left: 30px;
+    }
+
+    /* About Us and Our Mission styles */
+    .about-section {
+      background-color: #2a2a2a;
+      padding: 50px 0;
+    }
+
+    .about-section h2 {
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    /* Improved footer styles */
+    footer {
+      background-color: #1d1d1d;
+      color: #ffffff;
+      padding: 40px 0;
+    }
+
+    footer h5 {
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    footer ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    footer ul li {
+      margin-bottom: 10px;
+    }
+
+    footer ul li a {
+      color: #cccccc;
+      text-decoration: none;
+    }
+
+    footer ul li a:hover {
+      color: #ffffff;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      color: #1d1d1d;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .social-icon:hover {
+      background-color: #cccccc;
+      color: #000000;
+    }
+
+    /* New styles for testimonials */
+    .testimonial-section {
+      background-color: #333;
+      padding: 50px 0;
+    }
+
+    .testimonial-card {
+      background-color: #444;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-card img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    /* New styles for featured models */
+    .featured-models {
+      padding: 50px 0;
+    }
+
+    .model-card {
+      background-color: #2a2a2a;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .model-card img {
+      max-width: 100%;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    /* New styles for purchase and services section */
+    .purchase-services {
+      background-color: #2a2a2a;
+      padding: 50px 0;
+    }
+
+    .service-card {
+      background-color: #333;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .service-card i {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    /* Glowing effect on button hover */
+    .btn-glow:hover {
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+      transition: box-shadow 0.3s ease-in-out;
+    }
+
+    /* Manual slider for middle photos */
+    .manual-slider {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slider-container {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slider-item {
+      flex: 0 0 100%;
+    }
+
+    .slider-item img {
+      height: 500px; /* Increased height for vertically longer images */
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .slider-controls {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @media (max-width: 768px) {
+      .header-center {
+        font-size: 1.8rem;
+      }
+
+      .navbar-nav .nav-link {
+        font-size: 1.1rem;
+      }
+
+      .video-overlay h1 {
+        font-size: 3rem;
+      }
+
+      .header-right {
+        flex-direction: column;
+        align-items: flex-end;
+      }
+
+      .language-btn, .login-btn {
+        margin: 5px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container d-flex justify-content-between align-items-center">
+      <!-- Center "Drive" Text with Dot -->
+      <div class="header-center">
+        <span>• </span>Drive
+      </div>
+      
+      <!-- Language Buttons & Login Dropdown -->
+      <div class="header-right d-flex align-items-center">
+        <!-- Language Buttons -->
+        <button class="btn btn-outline-light language-btn">English</button>
+        <button class="btn btn-outline-light language-btn">Urdu</button>
+
+        <!-- Login Dropdown -->
+        <div class="dropdown">
+          <button class="btn btn-outline-light login-btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            Login
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="#">Sign In</a></li>
+            <li><a class="dropdown-item" href="#">Sign Up</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Menu Bar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="#">Art & Culture</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Events & Exhibitions</a></li>
+              <li><a class="dropdown-item" href="#">Drive Museum</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="#">Sustainability</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Environment</a></li>
+              <li><a class="dropdown-item" href="#">Responsibility</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="#">Design</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Sensual Purity</a></li>
+              <li><a class="dropdown-item" href="#">Drive Places</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="#">Innovation</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Concept</a></li>
+              <li><a class="dropdown-item" href="#">Milestone</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="#">Vehicles</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Mercedes-AMG</a></li>
+              <li><a class="dropdown-item" href="#">Mercedes-Benz</a></li>
+              <li><a class="dropdown-item" href="#">G-Class</a></li>
+              <li><a class="dropdown-item" href="#">Bentley</a></li>
+              <li><a class="dropdown-item" href="#">Lamborghini</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Image Slider Section -->
+  <section class="image-slider">
+  <div class="image-slide active">
+    <img src="q1.jpg" alt="Luxury Car 1" class="w-100">
+    <div class="image-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-start">
+      <h1 class="display-1">Drive</h1>
+      <button class="btn btn-outline-light mt-3 btn-glow">Discover More</button>
+    </div>
+  </div>
+  <div class="image-slide">
+    <img src="q2.jpg" alt="Luxury Car 2" class="w-100">
+    <div class="image-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-start">
+      <h1 class="display-1">Luxury</h1>
+      <button class="btn btn-outline-light mt-3 btn-glow">Explore Models</button>
+    </div>
+  </div>
+  <div class="image-slide">
+    <img src="q3.jpg" alt="Luxury Car 3" class="w-100">
+    <div class="image-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-start">
+      <h1 class="display-1">Performance</h1>
+      <button class="btn btn-outline-light mt-3 btn-glow">Feel the Power</button>
+    </div>
+  </div>
+</section>
+
+  <!-- Manual Image Slider -->
+  <section class="container my-5">
+    <div class="manual-slider">
+      <div class="slider-container">
+        <div class="slider-item">
+          <div class="position-relative">
+            <img src="i2.jpg" alt="Car 1" class="img-fluid w-100">
+            <button class="btn btn-outline-light position-absolute bottom-0 end-0 m-3 btn-glow">Drive Now</button>
+          </div>
+          <p class="mt-2">Luxury Redefined - The Ultimate Driving Experience.</p>
+        </div>
+        <div class="slider-item">
+          <div class="position-relative">
+            <img src="i3.jpg" alt="Car 2" class="img-fluid w-100">
+            <button class="btn btn-outline-light position-absolute bottom-0 end-0 m-3 btn-glow">Drive Now</button>
+          </div>
+          <p class="mt-2">Innovation Meets Elegance - Explore.</p>
+        </div>
+      </div>
+      <div class="slider-controls">
+        <button class="btn btn-outline-light btn-glow" onclick="changeSlide(-1)">
+          <span aria-hidden="true">&larr;</span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="btn btn-outline-light btn-glow" onclick="changeSlide(1)">
+          <span aria-hidden="true">&rarr;</span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Models -->
+  <section class="featured-models">
+    <div class="container">
+      <h2 class="text-center mb-5">Featured Models</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="model-card">
+            <img src="sedan.jpg" alt="Model 1" class="img-fluid">
+            <h3>Luxury Sedan</h3>
+            <p>Experience unparalleled comfort and style.</p>
+            <button class="btn btn-outline-light btn-glow">Learn More</button>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="model-card">
+            <img src="sports.jpg" alt="Model 2" class="img-fluid">
+            <h3>Sports Coupe</h3>
+            <p>Feel the thrill of high-performance driving.</p>
+            <button class="btn btn-outline-light btn-glow">Learn More</button>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="model-card">
+            <img src="EV.jpg" alt="Model 3" class="img-fluid">
+            <h3>Electric SUV</h3>
+            <p>The future of sustainable luxury is here.</p>
+            <button class="btn btn-outline-light btn-glow">Learn More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Purchase and Services Section -->
+  <section class="purchase-services">
+    <div class="container">
+      <h2 class="text-center mb-5">Purchase & Services</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="service-card">
+            <i class="fas fa-car"></i>
+            <h3>Car Accessories</h3>
+            <p>Enhance your driving experience with our premium accessories.</p>
+            <button class="btn btn-outline-light btn-glow">Shop Now</button>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="service-card">
+            <i class="fas fa-tachometer-alt"></i>
+            <h3>Performance Upgrades</h3>
+            <p>Boost your vehicle's performance with our expert upgrades.</p>
+            <button class="btn btn-outline-light btn-glow">Learn More</button>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="service-card">
+            <i class="fas fa-tools"></i>
+            <h3>Maintenance Services</h3>
+            <p>Keep your luxury car in top condition with our professional services.</p>
+            <button class="btn btn-outline-light btn-glow">Schedule Service</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us and Our Mission -->
+  <section class="about-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <h2>About Us</h2>
+          <p>Drive is a luxury car dealership committed to providing exceptional vehicles and unparalleled customer service. With years of experience in the automotive industry, we offer a curated selection of high-end cars that cater to the most discerning drivers.</p>
+        </div>
+        <div class="col-md-6 mb-4">
+          <h2>Our Mission</h2>
+          <p>Our mission is to redefine the luxury car buying experience. We strive to offer not just vehicles, but a lifestyle. Through our dedication to quality, innovation, and customer satisfaction, we aim to be the premier destination for automotive enthusiasts and luxury seekers alike.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonial-section">
+    <div class="container">
+      <h2 class="text-center mb-5">What Our Customers Say</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="testimonial-card">
+            <img src="pfp1.jpg" alt="Customer 1" class="img-fluid">
+            <h4>John Doe</h4>
+            <p>"The service at Drive is unparalleled. They made my dream of owning a luxury car a reality."</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="testimonial-card">
+            <img src="pfp2.jpg" alt="Customer 2" class="img-fluid">
+            <h4>Jane Smith</h4>
+            <p>"I was impressed by the knowledge and professionalism of the staff. They helped me find the perfect car."</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="testimonial-card">
+            <img src="pfp3.jpg" alt="Customer 3" class="img-fluid">
+            <h4>Mike Johnson</h4>
+            <p>"The after-sales service at Drive is exceptional. They truly care about their customers."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Improved Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 mb-4">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Vehicles</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-4">
+          <h5>Legal</h5>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-4">
+          <h5>Contact Us</h5>
+          <ul>
+            <li>123 Luxury Lane</li>
+            <li>Exquisite City, EC 12345</li>
+            <li>Phone: (555) 123-4567</li>
+            <li>Email: info@drive.com</li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-4">
+          <h5>Follow Us</h5>
+          <div class="social-icons">
+            <a href="#" class="social-icon">FB</a>
+            <a href="#" class="social-icon">TW</a>
+            <a href="#" class="social-icon">IG</a>
+            <a href="#" class="social-icon">LI</a>
+          </div>
+        </div>
+      </div>
+      <hr class="mt-4 mb-4">
+      <div class="row">
+        <div class="col-md-6 text-center text-md-start">
+          <p>&copy; 2023 Drive Luxury Cars. All rights reserved. Zayn Chaudhary</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <img src="logo.png" alt="Drive Logo" width="100">
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md-12">
+          <form class="d-flex justify-content-end">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="max-width: 200px;">
+            <button class="btn btn-outline-light" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS for video slider and manual image slider -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.image-slide');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides[currentSlide].classList.remove('active');
+      slides[index].classList.add('active');
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      let next = (currentSlide + 1) % slides.length;
+      showSlide(next);
+    }
+
+    setInterval(nextSlide, 5000); // Change slide every 5 seconds
+
+    // Manual image slider
+    let currentImageSlide = 0;
+    const imageSlider = document.querySelector('.slider-container');
+
+    window.changeSlide = function(direction) {
+      currentImageSlide += direction;
+      if (currentImageSlide < 0) currentImageSlide = 1;
+      if (currentImageSlide > 1) currentImageSlide = 0;
+      imageSlider.style.transform = `translateX(-${currentImageSlide * 100}%)`;
+    }
+  });
+</script>
+</body>
+</html>
+

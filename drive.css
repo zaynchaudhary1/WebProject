@@ -1,0 +1,59 @@
+/* Custom Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #ffffff;
+  background-color: #000000;
+}
+
+header {
+  border-bottom: 1px solid #333;
+}
+
+.video-section {
+  height: 70vh;
+  overflow: hidden;
+}
+
+.video-section video {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.video-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+footer {
+  border-top: 1px solid #333;
+}
+
+/* Hover Effects */
+.img-fluid {
+  transition: transform 0.3s ease;
+}
+
+.img-fluid:hover {
+  transform: scale(1.05);
+}
+
+/* Font and Color Adjustments */
+h1 {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+p {
+  font-weight: 300;
+  color: #cccccc;
+}
+
+.btn-outline-light {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.btn-outline-light:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
