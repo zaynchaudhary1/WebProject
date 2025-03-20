@@ -7,77 +7,93 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Custom CSS -->
   <style>
     /* Custom Styles */
+    :root {
+      --primary-color: #1a1a1a;
+      --secondary-color: #333333;
+      --accent-color: #c8a97e;
+      --text-color: #ffffff;
+      --text-muted: #aaaaaa;
+      --border-color: #444444;
+      --input-bg: #2a2a2a;
+      --hover-color: rgba(200, 169, 126, 0.2);
+    }
+
     body {
-      font-family: 'Poppins', sans-serif;
-      color: #ffffff;
-      background: linear-gradient(135deg, #1d1d1d, #4b4b4b);
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-color);
+      background: linear-gradient(135deg, #1d1d1d, #2d2d2d);
+      min-height: 100vh;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
     }
 
     header {
-      background-color: #000000;
+      background-color: var(--primary-color);
       position: relative;
       padding: 15px 0;
-      border-bottom: 1px solid #333;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo-link {
+      text-decoration: none;
+      color: var(--text-color);
+      transition: color 0.3s ease;
+    }
+
+    .logo-link:hover {
+      color: var(--accent-color);
     }
 
     .header-center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
       font-weight: 700;
+      letter-spacing: 1px;
     }
 
-    .header-right {
+    /* Modified language button styles */
+    .language-selector {
       display: flex;
       align-items: center;
     }
 
-    .btn-outline-light {
-      color: #fff;
-      border-color: #fff;
-    }
-
-    .btn-outline-light:hover {
-      background-color: #fff;
-      color: #000;
-    }
-
     .language-btn {
-      margin-right: 10px;
+      background: none;
+      border: none;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color 0.2s;
     }
 
-    .login-btn {
-      margin-left: 15px;
+    .language-btn.active {
+      color: var(--text-color);
     }
 
-    .video-section {
-      height: 70vh;
-      overflow: hidden;
+    .language-btn:hover {
+      color: var(--accent-color);
     }
 
-    .video-section video {
-      object-fit: cover;
-      height: 100%;
-      width: 100%;
+    .language-divider {
+      color: var(--border-color);
+      margin: 0 0.25rem;
     }
 
-    .video-overlay {
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
-      text-align: left;
-      padding-left: 30px;
-    }
-
+    /* Enhanced Navigation Bar */
     .navbar {
-      background: linear-gradient(to right, #2a2a2a, #444444);
+      background: linear-gradient(to right, rgba(26, 26, 26, 0.95), rgba(51, 51, 51, 0.95));
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(200, 169, 126, 0.2);
     }
 
     .navbar-nav {
@@ -88,16 +104,36 @@
 
     .navbar-nav .nav-item {
       position: relative;
+      margin: 0 5px;
     }
 
     .navbar-nav .nav-link {
-      color: #ffffff !important;
-      padding: 10px 15px;
+      color: var(--text-color) !important;
+      padding: 12px 18px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent-color);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .navbar-nav .nav-link:hover::after {
+      width: 70%;
     }
 
     .navbar-nav .nav-link:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-      color: #ffffff !important;
+      color: var(--accent-color) !important;
     }
 
     .navbar-nav .dropdown-menu {
@@ -105,36 +141,181 @@
       position: absolute;
       top: 100%;
       left: 0;
-      background-color: #2a2a2a;
-      border: none;
+      background-color: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+      border-radius: 0;
+      min-width: 200px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
 
     .navbar-nav .nav-item:hover .dropdown-menu {
       display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .dropdown-menu .dropdown-item {
-      color: #ffffff !important;
+      color: var(--text-color) !important;
       padding: 10px 20px;
+      border-bottom: 1px solid rgba(200, 169, 126, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-menu .dropdown-item:last-child {
+      border-bottom: none;
     }
 
     .dropdown-menu .dropdown-item:hover {
-      background-color: #555;
+      background-color: var(--hover-color);
+      color: var(--accent-color) !important;
+      padding-left: 25px;
     }
 
-    .img-fluid {
-      transition: transform 0.3s ease;
-      max-height: 300px; /* Reduce image size */
-      object-fit: cover;
+    /* Button Styles */
+    .btn-outline-light {
+      color: var(--text-color);
+      border-color: var(--accent-color);
+      background-color: transparent;
+      transition: all 0.3s ease;
     }
 
-    .img-fluid:hover {
-      transform: scale(1.05);
+    .btn-outline-light:hover {
+      background-color: var(--accent-color);
+      color: var(--primary-color);
+      border-color: var(--accent-color);
     }
 
-    p {
-      font-weight: 300;
-      color: #cccccc;
+    .btn-glow:hover {
+      box-shadow: 0 0 15px rgba(200, 169, 126, 0.5);
+    }
+
+    /* Login/Signup Modal Styles */
+    .modal-content {
+      background-color: var(--secondary-color);
+      color: var(--text-color);
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-header {
+      border-bottom: 1px solid var(--border-color);
+      background-color: var(--primary-color);
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      padding: 20px;
+    }
+
+    .modal-footer {
+      border-top: 1px solid var(--border-color);
+      background-color: var(--primary-color);
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      padding: 15px 20px;
+    }
+
+    .modal-title {
+      color: var(--text-color);
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+    }
+
+    .btn-close {
+      filter: invert(1) brightness(200%);
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-close:hover {
+      opacity: 1;
+    }
+
+    .form-control {
+      background-color: var(--input-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 12px 15px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      background-color: rgba(42, 42, 42, 0.8);
+      border-color: var(--accent-color);
+      color: var(--text-color);
+      box-shadow: 0 0 0 0.25rem rgba(200, 169, 126, 0.25);
+    }
+
+    .form-label {
+      color: var(--text-color);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .form-text {
+      color: var(--text-muted);
+    }
+
+    /* Custom checkbox styling */
+    .form-check-input {
+      background-color: var(--input-bg);
+      border-color: var(--border-color);
+      width: 18px;
+      height: 18px;
+    }
+
+    .form-check-input:checked {
+      background-color: var(--accent-color);
+      border-color: var(--accent-color);
+    }
+
+    .form-check-input:focus {
+      box-shadow: 0 0 0 0.25rem rgba(200, 169, 126, 0.25);
+      border-color: var(--accent-color);
+    }
+
+    .form-check-label {
+      padding-left: 5px;
+      cursor: pointer;
+    }
+
+    .password-strength {
+      height: 5px;
+      margin-top: 5px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .password-strength.weak {
+      background-color: #dc3545;
+      width: 30%;
+    }
+
+    .password-strength.medium {
+      background-color: #ffc107;
+      width: 60%;
+    }
+
+    .password-strength.strong {
+      background-color: #28a745;
+      width: 100%;
+    }
+
+    .forgot-password {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .forgot-password:hover {
+      color: var(--accent-color);
+      text-decoration: underline;
     }
 
     /* Image slider styles */
@@ -165,145 +346,22 @@
     }
 
     .image-overlay {
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+      color: var(--text-color);
       text-align: left;
       padding-left: 30px;
     }
 
-    /* About Us and Our Mission styles */
-    .about-section {
-      background-color: #2a2a2a;
-      padding: 50px 0;
-    }
-
-    .about-section h2 {
-      color: #ffffff;
-      margin-bottom: 20px;
-    }
-
-    /* Improved footer styles */
-    footer {
-      background-color: #1d1d1d;
-      color: #ffffff;
-      padding: 40px 0;
-    }
-
-    footer h5 {
-      color: #ffffff;
-      margin-bottom: 20px;
-    }
-
-    footer ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-
-    footer ul li {
-      margin-bottom: 10px;
-    }
-
-    footer ul li a {
-      color: #cccccc;
-      text-decoration: none;
-    }
-
-    footer ul li a:hover {
-      color: #ffffff;
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 10px;
-    }
-
-    .social-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background-color: #ffffff;
-      color: #1d1d1d;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    .social-icon:hover {
-      background-color: #cccccc;
-      color: #000000;
-    }
-
-    /* New styles for testimonials */
-    .testimonial-section {
-      background-color: #333;
-      padding: 50px 0;
-    }
-
-    .testimonial-card {
-      background-color: #444;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .testimonial-card img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      margin-bottom: 10px;
-    }
-
-    /* New styles for featured models */
-    .featured-models {
-      padding: 50px 0;
-    }
-
-    .model-card {
-      background-color: #2a2a2a;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .model-card img {
-      max-width: 100%;
-      border-radius: 5px;
-      margin-bottom: 15px;
-    }
-
-    /* New styles for purchase and services section */
-    .purchase-services {
-      background-color: #2a2a2a;
-      padding: 50px 0;
-    }
-
-    .service-card {
-      background-color: #333;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .service-card i {
-      font-size: 48px;
-      margin-bottom: 15px;
-    }
-
-    /* Glowing effect on button hover */
-    .btn-glow:hover {
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-      transition: box-shadow 0.3s ease-in-out;
+    .image-overlay h1 {
+      font-size: 4rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
 
     /* Manual slider for middle photos */
     .manual-slider {
       position: relative;
       overflow: hidden;
+      margin: 50px 0;
     }
 
     .slider-container {
@@ -316,38 +374,471 @@
     }
 
     .slider-item img {
-      height: 500px; /* Increased height for vertically longer images */
+      height: 500px;
       object-fit: cover;
       width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
 
     .slider-controls {
       position: absolute;
-      bottom: 10px;
+      bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
+      z-index: 10;
+    }
+
+    .slider-controls .btn {
+      margin: 0 5px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Featured Models Section */
+    .featured-models {
+      padding: 80px 0;
+      background-color: rgba(26, 26, 26, 0.7);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background-color: var(--accent-color);
+    }
+
+    .model-card {
+      background-color: var(--secondary-color);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-bottom: 30px;
+    }
+
+    .model-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .model-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .model-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .model-card-body {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .model-card h3 {
+      margin-bottom: 10px;
+      color: var(--text-color);
+    }
+
+    .model-card p {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    /* Purchase & Services Section */
+    .purchase-services {
+      padding: 80px 0;
+      background-color: rgba(42, 42, 42, 0.7);
+    }
+
+    .service-card {
+      background-color: var(--secondary-color);
+      border-radius: 10px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+      height: 100%;
+      border: 1px solid transparent;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent-color);
+    }
+
+    .service-icon {
+      font-size: 3rem;
+      color: var(--accent-color);
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      margin-bottom: 15px;
+    }
+
+    .service-card p {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    /* About Section */
+    .about-section {
+      padding: 80px 0;
+      background-color: rgba(26, 26, 26, 0.7);
+    }
+
+    .about-section h2 {
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .about-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background-color: var(--accent-color);
+    }
+
+    .about-section p {
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* Testimonials Section */
+    .testimonial-section {
+      padding: 80px 0;
+      background-color: rgba(42, 42, 42, 0.7);
+    }
+
+    .testimonial-card {
+      background-color: var(--secondary-color);
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+      height: 100%;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .testimonial-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-card img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 15px;
+      border: 2px solid var(--accent-color);
+    }
+
+    .testimonial-card h4 {
+      margin-bottom: 0;
+      font-weight: 600;
+    }
+
+    .testimonial-card p {
+      color: var(--text-muted);
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    .testimonial-card p::before {
+      content: '\201C';
+      font-size: 1.5rem;
+      color: var(--accent-color);
+      margin-right: 5px;
+    }
+
+    .testimonial-card p::after {
+      content: '\201D';
+      font-size: 1.5rem;
+      color: var(--accent-color);
+      margin-left: 5px;
+    }
+
+    /* Footer styles */
+    footer {
+      background-color: var(--primary-color);
+      color: var(--text-color);
+      padding: 60px 0 30px;
+      margin-top: 0;
+    }
+
+    footer h5 {
+      color: var(--text-color);
+      margin-bottom: 25px;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    footer h5::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: var(--accent-color);
+    }
+
+    footer ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    footer ul li {
+      margin-bottom: 12px;
+    }
+
+    footer ul li a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      position: relative;
+      padding-left: 15px;
+    }
+
+    footer ul li a::before {
+      content: '\f105';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      color: var(--accent-color);
+    }
+
+    footer ul li a:hover {
+      color: var(--accent-color);
+      padding-left: 20px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: var(--text-color);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-icon:hover {
+      background-color: var(--accent-color);
+      color: var(--primary-color);
+      transform: translateY(-5px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border-color);
+      padding-top: 20px;
+      margin-top: 40px;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-color);
+    }
+
+    /* Transparent search bar styles */
+    .search-container {
+      position: relative;
+      margin-left: 20px;
+    }
+
+    .transparent-search {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-color);
+      border-radius: 30px;
+      padding: 8px 15px 8px 40px;
+      transition: all 0.3s ease;
+      width: 200px;
+    }
+
+    .transparent-search:focus {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 0.25rem rgba(200, 169, 126, 0.25);
+      outline: none;
+      width: 250px;
+    }
+
+    .transparent-search::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.6);
+      pointer-events: none;
+    }
+
+    /* Adjust header layout to prevent overlap */
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      height: 60px; /* Fixed height for header */
+    }
+
+    .header-left {
+      width: 33%; /* Take up 1/3 of the space */
+    }
+
+    .header-center-container {
+      width: 33%; /* Take up 1/3 of the space */
+      text-align: center;
+    }
+
+    .header-right {
+      width: 33%; /* Take up 1/3 of the space */
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    /* Success message for forgot password */
+    .success-icon {
+      font-size: 4rem;
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 991px) {
+      .navbar-nav .dropdown-menu {
+        position: static;
+        float: none;
+        width: auto;
+        margin-top: 0;
+        background-color: transparent;
+        border: 0;
+        box-shadow: none;
+        display: block;
+        padding-left: 20px;
+      }
+
+      .navbar-nav .nav-link::after {
+        display: none;
+      }
+
+      .navbar-nav .dropdown-menu .dropdown-item {
+        padding: 8px 15px;
+        color: var(--text-muted) !important;
+      }
+
+      .navbar-nav .dropdown-menu .dropdown-item:hover {
+        background-color: transparent;
+      }
+
+      .image-overlay h1 {
+        font-size: 3rem;
+      }
     }
 
     @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        height: auto;
+        padding: 15px 0;
+      }
+
+      .header-left, .header-center-container, .header-right {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
       .header-center {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        text-align: center;
+        margin: 10px 0;
         font-size: 1.8rem;
-      }
-
-      .navbar-nav .nav-link {
-        font-size: 1.1rem;
-      }
-
-      .video-overlay h1 {
-        font-size: 3rem;
       }
 
       .header-right {
         flex-direction: column;
-        align-items: flex-end;
+        align-items: center;
       }
 
       .language-btn, .login-btn {
         margin: 5px 0;
+      }
+      
+      .search-container {
+        margin-top: 10px;
+        margin-left: 0;
+        width: 100%;
+      }
+      
+      .transparent-search {
+        width: 100%;
+      }
+      
+      .transparent-search:focus {
+        width: 100%;
+      }
+
+      .image-overlay h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .image-overlay h1 {
+        font-size: 2rem;
+      }
+
+      .slider-item img {
+        height: 300px;
       }
     }
   </style>
@@ -355,33 +846,44 @@
 <body>
   <!-- Header -->
   <header>
-    <div class="container d-flex justify-content-between align-items-center">
-      <!-- Center "Drive" Text with Dot -->
-      <div class="header-center">
-        <span>• </span>Drive
-      </div>
-      
-      <!-- Language Buttons & Login Dropdown -->
-      <div class="header-right d-flex align-items-center">
-        <!-- Language Buttons -->
-        <button class="btn btn-outline-light language-btn">English</button>
-        <button class="btn btn-outline-light language-btn">Urdu</button>
-
-        <!-- Login Dropdown -->
-        <div class="dropdown">
-          <button class="btn btn-outline-light login-btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            Login
+    <div class="container">
+      <div class="header-container">
+        <!-- Left - Language buttons -->
+        <div class="header-left">
+          <div class="language-selector">
+            <button class="language-btn active" onclick="setLanguage('English')">English</button>
+            <span class="language-divider">|</span>
+            <button class="language-btn" onclick="setLanguage('Urdu')">Urdu</button>
+          </div>
+        </div>
+        
+        <!-- Center "Drive" Text -->
+        <div class="header-center-container">
+          <a href="index.html" class="logo-link">
+            <div class="header-center">
+              Drive
+            </div>
+          </a>
+        </div>
+        
+        <!-- Login Dropdown & Search -->
+        <div class="header-right">
+          <!-- Login Button -->
+          <button class="btn btn-outline-light login-btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+            Member Login
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <li><a class="dropdown-item" href="#">Sign In</a></li>
-            <li><a class="dropdown-item" href="#">Sign Up</a></li>
-          </ul>
+          
+          <!-- Search Bar -->
+          <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="search" class="transparent-search" placeholder="Search..." aria-label="Search">
+          </div>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Menu Bar -->
+  <!-- Enhanced Navigation Bar -->
   <nav class="navbar navbar-expand-lg">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -434,31 +936,31 @@
 
   <!-- Image Slider Section -->
   <section class="image-slider">
-  <div class="image-slide active">
-    <img src="q1.jpg" alt="Luxury Car 1" class="w-100">
-    <div class="image-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-start">
-      <h1 class="display-1">Drive</h1>
-      <button class="btn btn-outline-light mt-3 btn-glow">Discover More</button>
+    <div class="image-slide active">
+      <img src="q1.jpg" alt="Luxury Car 1" class="w-100">
+      <div class="image-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-start">
+        <h1>Drive</h1>
+        <button class="btn btn-outline-light mt-3 btn-glow">Discover More</button>
+      </div>
     </div>
-  </div>
-  <div class="image-slide">
-    <img src="q2.jpg" alt="Luxury Car 2" class="w-100">
-    <div class="image-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-start">
-      <h1 class="display-1">Luxury</h1>
-      <button class="btn btn-outline-light mt-3 btn-glow">Explore Models</button>
+    <div class="image-slide">
+      <img src="q2.jpg" alt="Luxury Car 2" class="w-100">
+      <div class="image-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-start">
+        <h1>Luxury</h1>
+        <button class="btn btn-outline-light mt-3 btn-glow">Explore Models</button>
+      </div>
     </div>
-  </div>
-  <div class="image-slide">
-    <img src="q3.jpg" alt="Luxury Car 3" class="w-100">
-    <div class="image-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-start">
-      <h1 class="display-1">Performance</h1>
-      <button class="btn btn-outline-light mt-3 btn-glow">Feel the Power</button>
+    <div class="image-slide">
+      <img src="q3.jpg" alt="Luxury Car 3" class="w-100">
+      <div class="image-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-start">
+        <h1>Performance</h1>
+        <button class="btn btn-outline-light mt-3 btn-glow">Feel the Power</button>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- Manual Image Slider -->
-  <section class="container my-5">
+  <section class="container">
     <div class="manual-slider">
       <div class="slider-container">
         <div class="slider-item">
@@ -478,12 +980,10 @@
       </div>
       <div class="slider-controls">
         <button class="btn btn-outline-light btn-glow" onclick="changeSlide(-1)">
-          <span aria-hidden="true">&larr;</span>
-          <span class="visually-hidden">Previous</span>
+          <i class="fas fa-chevron-left"></i>
         </button>
         <button class="btn btn-outline-light btn-glow" onclick="changeSlide(1)">
-          <span aria-hidden="true">&rarr;</span>
-          <span class="visually-hidden">Next</span>
+          <i class="fas fa-chevron-right"></i>
         </button>
       </div>
     </div>
@@ -492,30 +992,36 @@
   <!-- Featured Models -->
   <section class="featured-models">
     <div class="container">
-      <h2 class="text-center mb-5">Featured Models</h2>
+      <h2 class="section-title">Featured Models</h2>
       <div class="row">
         <div class="col-md-4 mb-4">
           <div class="model-card">
             <img src="sedan.jpg" alt="Model 1" class="img-fluid">
-            <h3>Luxury Sedan</h3>
-            <p>Experience unparalleled comfort and style.</p>
-            <button class="btn btn-outline-light btn-glow">Learn More</button>
+            <div class="model-card-body">
+              <h3>Luxury Sedan</h3>
+              <p>Experience unparalleled comfort and style.</p>
+              <button class="btn btn-outline-light btn-glow">Learn More</button>
+            </div>
           </div>
         </div>
         <div class="col-md-4 mb-4">
           <div class="model-card">
             <img src="sports.jpg" alt="Model 2" class="img-fluid">
-            <h3>Sports Coupe</h3>
-            <p>Feel the thrill of high-performance driving.</p>
-            <button class="btn btn-outline-light btn-glow">Learn More</button>
+            <div class="model-card-body">
+              <h3>Sports Coupe</h3>
+              <p>Feel the thrill of high-performance driving.</p>
+              <button class="btn btn-outline-light btn-glow">Learn More</button>
+            </div>
           </div>
         </div>
         <div class="col-md-4 mb-4">
           <div class="model-card">
             <img src="EV.jpg" alt="Model 3" class="img-fluid">
-            <h3>Electric SUV</h3>
-            <p>The future of sustainable luxury is here.</p>
-            <button class="btn btn-outline-light btn-glow">Learn More</button>
+            <div class="model-card-body">
+              <h3>Electric SUV</h3>
+              <p>The future of sustainable luxury is here.</p>
+              <button class="btn btn-outline-light btn-glow">Learn More</button>
+            </div>
           </div>
         </div>
       </div>
@@ -525,11 +1031,13 @@
   <!-- Purchase and Services Section -->
   <section class="purchase-services">
     <div class="container">
-      <h2 class="text-center mb-5">Purchase & Services</h2>
+      <h2 class="section-title">Purchase & Services</h2>
       <div class="row">
         <div class="col-md-4 mb-4">
           <div class="service-card">
-            <i class="fas fa-car"></i>
+            <div class="service-icon">
+              <i class="fas fa-car"></i>
+            </div>
             <h3>Car Accessories</h3>
             <p>Enhance your driving experience with our premium accessories.</p>
             <button class="btn btn-outline-light btn-glow">Shop Now</button>
@@ -537,7 +1045,9 @@
         </div>
         <div class="col-md-4 mb-4">
           <div class="service-card">
-            <i class="fas fa-tachometer-alt"></i>
+            <div class="service-icon">
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
             <h3>Performance Upgrades</h3>
             <p>Boost your vehicle's performance with our expert upgrades.</p>
             <button class="btn btn-outline-light btn-glow">Learn More</button>
@@ -545,7 +1055,9 @@
         </div>
         <div class="col-md-4 mb-4">
           <div class="service-card">
-            <i class="fas fa-tools"></i>
+            <div class="service-icon">
+              <i class="fas fa-tools"></i>
+            </div>
             <h3>Maintenance Services</h3>
             <p>Keep your luxury car in top condition with our professional services.</p>
             <button class="btn btn-outline-light btn-glow">Schedule Service</button>
@@ -574,27 +1086,33 @@
   <!-- Testimonials -->
   <section class="testimonial-section">
     <div class="container">
-      <h2 class="text-center mb-5">What Our Customers Say</h2>
+      <h2 class="section-title">What Our Customers Say</h2>
       <div class="row">
         <div class="col-md-4 mb-4">
           <div class="testimonial-card">
-            <img src="pfp1.jpg" alt="Customer 1" class="img-fluid">
-            <h4>John Doe</h4>
-            <p>"The service at Drive is unparalleled. They made my dream of owning a luxury car a reality."</p>
+            <div class="testimonial-header">
+              <img src="pfp1.jpg" alt="Customer 1" class="img-fluid">
+              <h4>John Doe</h4>
+            </div>
+            <p>The service at Drive is unparalleled. They made my dream of owning a luxury car a reality.</p>
           </div>
         </div>
         <div class="col-md-4 mb-4">
           <div class="testimonial-card">
-            <img src="pfp2.jpg" alt="Customer 2" class="img-fluid">
-            <h4>Jane Smith</h4>
-            <p>"I was impressed by the knowledge and professionalism of the staff. They helped me find the perfect car."</p>
+            <div class="testimonial-header">
+              <img src="pfp2.jpg" alt="Customer 2" class="img-fluid">
+              <h4>Jane Smith</h4>
+            </div>
+            <p>I was impressed by the knowledge and professionalism of the staff. They helped me find the perfect car.</p>
           </div>
         </div>
         <div class="col-md-4 mb-4">
           <div class="testimonial-card">
-            <img src="pfp3.jpg" alt="Customer 3" class="img-fluid">
-            <h4>Mike Johnson</h4>
-            <p>"The after-sales service at Drive is exceptional. They truly care about their customers."</p>
+            <div class="testimonial-header">
+              <img src="pfp3.jpg" alt="Customer 3" class="img-fluid">
+              <h4>Mike Johnson</h4>
+            </div>
+            <p>The after-sales service at Drive is exceptional. They truly care about their customers.</p>
           </div>
         </div>
       </div>
@@ -608,7 +1126,7 @@
         <div class="col-md-3 mb-4">
           <h5>Quick Links</h5>
           <ul>
-            <li><a href="#">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="#">Vehicles</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="#">About Us</a></li>
@@ -629,44 +1147,250 @@
             <li>123 Luxury Lane</li>
             <li>Exquisite City, EC 12345</li>
             <li>Phone: (555) 123-4567</li>
-            <li>Email: info@drive.com</li>
+            <li>Email: info@driveluxury.com</li>
           </ul>
         </div>
         <div class="col-md-3 mb-4">
           <h5>Follow Us</h5>
           <div class="social-icons">
-            <a href="#" class="social-icon">FB</a>
-            <a href="#" class="social-icon">TW</a>
-            <a href="#" class="social-icon">IG</a>
-            <a href="#" class="social-icon">LI</a>
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
           </div>
         </div>
       </div>
-      <hr class="mt-4 mb-4">
-      <div class="row">
-        <div class="col-md-6 text-center text-md-start">
-          <p>&copy; 2023 Drive Luxury Cars. All rights reserved. Zayn Chaudhary</p>
-        </div>
-        <div class="col-md-6 text-center text-md-end">
-          <img src="logo.png" alt="Drive Logo" width="100">
-        </div>
-      </div>
-      <div class="row mt-4">
-        <div class="col-md-12">
-          <form class="d-flex justify-content-end">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="max-width: 200px;">
-            <button class="btn btn-outline-light" type="submit">Search</button>
-          </form>
+      <div class="footer-bottom">
+        <div class="row">
+          <div class="col-md-6 text-center text-md-start">
+            <p>&copy; 2023 Drive Luxury Cars. All rights reserved. Zayn Chaudhary</p>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <div class="footer-logo">Drive</div>
+          </div>
         </div>
       </div>
     </div>
   </footer>
 
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Sign In</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Alert for errors (hidden by default) -->
+          <div class="alert alert-danger d-none" id="login-error-alert" role="alert">
+            Invalid email or password. Please try again.
+          </div>
+
+          <form id="login-form" onsubmit="return validateLoginForm()">
+            <div class="mb-4">
+              <label for="login-email" class="form-label">Email Address</label>
+              <div class="input-group">
+                <span class="input-group-text bg-dark border-secondary text-white">
+                  <i class="fas fa-envelope"></i>
+                </span>
+                <input type="email" class="form-control" id="login-email" name="email" required>
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <label for="login-password" class="form-label mb-0">Password</label>
+                <a href="#" class="forgot-password" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" data-bs-dismiss="modal">Forgot password?</a>
+              </div>
+              <div class="input-group">
+                <span class="input-group-text bg-dark border-secondary text-white">
+                  <i class="fas fa-lock"></i>
+                </span>
+                <input type="password" class="form-control" id="login-password" name="password" required>
+                <button class="btn btn-dark border-secondary" type="button" id="toggle-login-password">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div class="mb-4 form-check">
+              <input type="checkbox" class="form-check-input" id="remember-me">
+              <label class="form-check-label" for="remember-me">Remember me</label>
+            </div>
+            
+            <div class="d-grid">
+              <button type="submit" class="btn btn-outline-light btn-glow">Sign In</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <p class="mb-0">Don't have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">Sign Up</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signupModalLabel">Create Account</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Alert for errors (hidden by default) -->
+          <div class="alert alert-danger d-none" id="signup-error-alert" role="alert">
+            Please fix the errors in the form.
+          </div>
+
+          <form id="signup-form" onsubmit="return validateSignupForm()">
+            <div class="row mb-4">
+              <div class="col-md-6 mb-3 mb-md-0">
+                <label for="first-name" class="form-label">First Name</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-dark border-secondary text-white">
+                    <i class="fas fa-user"></i>
+                  </span>
+                  <input type="text" class="form-control" id="first-name" name="first-name" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="last-name" class="form-label">Last Name</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-dark border-secondary text-white">
+                    <i class="fas fa-user"></i>
+                  </span>
+                  <input type="text" class="form-control" id="last-name" name="last-name" required>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <label for="signup-email" class="form-label">Email Address</label>
+              <div class="input-group">
+                <span class="input-group-text bg-dark border-secondary text-white">
+                  <i class="fas fa-envelope"></i>
+                </span>
+                <input type="email" class="form-control" id="signup-email" name="email" required>
+              </div>
+              <div class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            
+            <div class="mb-4">
+              <label for="signup-password" class="form-label">Password</label>
+              <div class="input-group">
+                <span class="input-group-text bg-dark border-secondary text-white">
+                  <i class="fas fa-lock"></i>
+                </span>
+                <input type="password" class="form-control" id="signup-password" name="password" required onkeyup="checkPasswordStrength()">
+                <button class="btn btn-dark border-secondary" type="button" id="toggle-signup-password">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+              <div class="password-strength" id="password-strength"></div>
+              <div class="form-text" id="password-text">Password must be at least 8 characters.</div>
+            </div>
+            
+            <div class="mb-4">
+              <label for="confirm-password" class="form-label">Confirm Password</label>
+              <div class="input-group">
+                <span class="input-group-text bg-dark border-secondary text-white">
+                  <i class="fas fa-lock"></i>
+                </span>
+                <input type="password" class="form-control" id="confirm-password" name="confirm-password" required>
+              </div>
+            </div>
+            
+            <div class="mb-4 form-check">
+              <input type="checkbox" class="form-check-input" id="terms" required>
+              <label class="form-check-label" for="terms">
+                I agree to the <a href="#" class="text-white">Terms and Conditions</a>
+              </label>
+            </div>
+            
+            <div class="mb-4 form-check">
+              <input type="checkbox" class="form-check-input" id="newsletter">
+              <label class="form-check-label" for="newsletter">
+                Subscribe to our newsletter
+              </label>
+            </div>
+            
+            <div class="d-grid">
+              <button type="submit" class="btn btn-outline-light btn-lg btn-glow">Create Account</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <p class="mb-0">Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Sign In</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Alert for errors (hidden by default) -->
+          <div class="alert alert-danger d-none" id="forgot-error-alert" role="alert">
+            Please enter a valid email address.
+          </div>
+
+          <!-- Initial Form (visible by default) -->
+          <div id="reset-form-container">
+            <p class="text-muted mb-4">Enter the email address associated with your account and we'll send you a link to reset your password.</p>
+            
+            <form id="reset-form" onsubmit="return handleResetSubmit()">
+              <div class="mb-4">
+                <label for="reset-email" class="form-label">Email Address</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-dark border-secondary text-white">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                  <input type="email" class="form-control" id="reset-email" name="email" required>
+                </div>
+              </div>
+              
+              <div class="d-grid">
+                <button type="submit" class="btn btn-outline-light btn-lg btn-glow">Send Reset Link</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Success Message (hidden by default) -->
+          <div id="success-container" class="text-center py-4 d-none">
+            <div class="success-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 class="mb-3">Check Your Email</h3>
+            <p class="text-muted mb-4">We've sent a password reset link to <span id="sent-email" class="text-white"></span>. Please check your inbox and follow the instructions to reset your password.</p>
+            <p class="text-muted small mb-4">If you don't see the email, check your spam folder or request another link.</p>
+            <div class="d-grid gap-3">
+              <button type="button" class="btn btn-outline-light btn-glow" onclick="showResetForm()">Try Another Email</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <p class="mb-0">Remember your password? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Sign In</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Custom JS for video slider and manual image slider -->
+  
+  <!-- Custom JS for image slider, form validation, etc. -->
   <script>
   document.addEventListener('DOMContentLoaded', function() {
+    // Image slider functionality
     const slides = document.querySelectorAll('.image-slide');
     let currentSlide = 0;
 
@@ -693,8 +1417,207 @@
       if (currentImageSlide > 1) currentImageSlide = 0;
       imageSlider.style.transform = `translateX(-${currentImageSlide * 100}%)`;
     }
+
+    // Toggle password visibility for login form
+    document.getElementById('toggle-login-password').addEventListener('click', function() {
+      const passwordInput = document.getElementById('login-password');
+      const icon = this.querySelector('i');
+      
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    });
+
+    // Toggle password visibility for signup form
+    document.getElementById('toggle-signup-password').addEventListener('click', function() {
+      const passwordInput = document.getElementById('signup-password');
+      const icon = this.querySelector('i');
+      
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    });
+
+    // Language selector
+    window.setLanguage = function(language) {
+      const buttons = document.querySelectorAll('.language-btn');
+      buttons.forEach(button => {
+        if (button.textContent === language) {
+          button.classList.add('active');
+        } else {
+          button.classList.remove('active');
+        }
+      });
+    }
+
+    // Check password strength
+    window.checkPasswordStrength = function() {
+      const password = document.getElementById('signup-password').value;
+      const strengthBar = document.getElementById('password-strength');
+      const strengthText = document.getElementById('password-text');
+      
+      // Remove all classes
+      strengthBar.className = 'password-strength';
+      
+      if (password.length === 0) {
+        strengthBar.style.width = '0';
+        strengthText.textContent = 'Password must be at least 8 characters.';
+        return;
+      }
+      
+      // Check password strength
+      let strength = 0;
+      
+      // Length check
+      if (password.length >= 8) strength += 1;
+      
+      // Contains lowercase
+      if (/[a-z]/.test(password)) strength += 1;
+      
+      // Contains uppercase
+      if (/[A-Z]/.test(password)) strength += 1;
+      
+      // Contains number
+      if (/[0-9]/.test(password)) strength += 1;
+      
+      // Contains special character
+      if (/[^A-Za-z0-9]/.test(password)) strength += 1;
+      
+      // Set strength bar
+      if (strength <= 2) {
+        strengthBar.classList.add('weak');
+        strengthText.textContent = 'Weak password';
+      } else if (strength <= 4) {
+        strengthBar.classList.add('medium');
+        strengthText.textContent = 'Medium strength password';
+      } else {
+        strengthBar.classList.add('strong');
+        strengthText.textContent = 'Strong password';
+      }
+    }
   });
-</script>
+
+  // Login form validation
+  function validateLoginForm() {
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    const errorAlert = document.getElementById('login-error-alert');
+    
+    // Simple email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      errorAlert.textContent = 'Please enter a valid email address.';
+      errorAlert.classList.remove('d-none');
+      return false;
+    }
+    
+    // Simple password validation (at least 6 characters)
+    if (password.length < 6) {
+      errorAlert.textContent = 'Password must be at least 6 characters.';
+      errorAlert.classList.remove('d-none');
+      return false;
+    }
+    
+    // In a real application, you would send this data to your server
+    // For demo purposes, we'll just hide the modal and show a success message
+    const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+    loginModal.hide();
+    alert('Login successful!');
+    return false; // Prevent actual form submission
+  }
+
+  // Signup form validation
+  function validateSignupForm() {
+    const firstName = document.getElementById('first-name').value;
+    const lastName = document.getElementById('last-name').value;
+    const email = document.getElementById('signup-email').value;
+    const password = document.getElementById('signup-password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+    const terms = document.getElementById('terms').checked;
+    const errorAlert = document.getElementById('signup-error-alert');
+    
+    // Reset error
+    errorAlert.classList.add('d-none');
+    
+    // Simple email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      errorAlert.textContent = 'Please enter a valid email address.';
+      errorAlert.classList.remove('d-none');
+      return false;
+    }
+    
+    // Password validation
+    if (password.length < 8) {
+      errorAlert.textContent = 'Password must be at least 8 characters.';
+      errorAlert.classList.remove('d-none');
+      return false;
+    }
+    
+    // Password match validation
+    if (password !== confirmPassword) {
+      errorAlert.textContent = 'Passwords do not match.';
+      errorAlert.classList.remove('d-none');
+      return false;
+    }
+    
+    // Terms validation
+    if (!terms) {
+      errorAlert.textContent = 'You must agree to the Terms and Conditions.';
+      errorAlert.classList.remove('d-none');
+      return false;
+    }
+    
+    // In a real application, you would send this data to your server
+    // For demo purposes, we'll just hide the modal and show a success message
+    const signupModal = bootstrap.Modal.getInstance(document.getElementById('signupModal'));
+    signupModal.hide();
+    alert('Account created successfully!');
+    return false; // Prevent actual form submission
+  }
+
+  // Forgot password form handling
+  function handleResetSubmit() {
+    const email = document.getElementById('reset-email').value;
+    const errorAlert = document.getElementById('forgot-error-alert');
+    
+    // Simple email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      errorAlert.classList.remove('d-none');
+      return false;
+    }
+    
+    // Hide error if previously shown
+    errorAlert.classList.add('d-none');
+    
+    // Show success message
+    document.getElementById('reset-form-container').classList.add('d-none');
+    document.getElementById('success-container').classList.remove('d-none');
+    document.getElementById('sent-email').textContent = email;
+    
+    // In a real application, you would send this data to your server
+    return false; // Prevent actual form submission
+  }
+
+  // Show reset form again
+  function showResetForm() {
+    document.getElementById('success-container').classList.add('d-none');
+    document.getElementById('reset-form-container').classList.remove('d-none');
+    document.getElementById('reset-email').value = '';
+  }
+  </script>
 </body>
 </html>
-
